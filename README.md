@@ -1,6 +1,6 @@
 # @cattn/hdr
 
-A Svelte library for HDR image processing and manipulation.
+A Svelte library for rendering element colors in HDR!
 
 ## Installation
 
