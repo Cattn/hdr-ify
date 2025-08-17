@@ -6,7 +6,7 @@
 	"author": "cattn",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/cattn/hdr-ify.git"
+		"url": "git+https://github.com/cattn/hdr-ify.git"
 	},
 	"homepage": "https://github.com/cattn/hdr-ify#readme",
 	"bugs": {
