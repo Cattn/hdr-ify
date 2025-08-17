@@ -1,0 +1,17 @@
+# Development files
+src/routes/
+*.test.*
+*.spec.*
+**/__tests__/
+**/__mocks__/
+
+# Build artifacts
+.svelte-kit/
+vite.config.ts.timestamp-*
+
+# Development configs
+.vscode/
+.idea/
+*.log
+.DS_Store
+
