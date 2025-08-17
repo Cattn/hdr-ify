@@ -5,7 +5,7 @@ A Svelte library for HDR image processing and manipulation.
 ## Installation
 
 ```sh
-npm install @cattn/hdr --save-dev
+npm i @cattn/hdr
 ```
 
 ## Usage
