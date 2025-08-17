@@ -1,3 +1,5 @@
+// the original toP3 code was from https://github.com/pugson/hexp3. I've since modified it, but thank you to the original author!
+
 export const toP3 = (
 	color: string | null | undefined
 ): { color: string; r: string; g: string; b: string; a: string } | undefined => {
