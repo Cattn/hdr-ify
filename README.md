@@ -5,59 +5,94 @@ A Svelte library for HDR image processing and manipulation.
 ## Installation
 
 ```sh
-npm install @cattn/hdr
+npm install @cattn/hdr --save-dev
 ```
 
 ## Usage
 
+### Router
+
 ```typescript
-import { SomeComponent } from '@cattn/hdr';
+import { HDRRouter } from '@cattn/hdr';
 ```
 
+src/+layout.svelte
+
 ```svelte
-<script>
-	import { SomeComponent } from '@cattn/hdr';
+<script lang="ts">
+	import { HDRRouter } from '@cattn/hdr';
 </script>
 
-<SomeComponent />
+<!-- This should be at the top of your file! -->
+<HDRRouter />
+```
+
+### `hdrify`
+
+Whatever `color:` is on the element will automatically be converted to HDR. It's added here via `style=` as an example.
+
+```svelte
+<script lang="ts">
+	import { hdrify } from '@cattn/hdr';
+</script>
+
+<h2 style="color: #00ff00" {@attach hdrify()}>The color is in HDR!!</h2>
+```
+
+### `hdrifyBackground`
+
+Whatever `background-color:` is on the element will automatically be converted to HDR. It's added here via `style=` as an example.
+
+```svelte
+<script lang="ts">
+	import { hdrifyBackground } from '@cattn/hdr';
+</script>
+
+<h2 style="background-color: #00ff00" {@attach hdrifyBackground()}>The background is in HDR!!</h2>
+```
+
+### `hdrifyHex`
+
+If you'd like to dynamically change the color, please pass it in with a `$state` rune. Otherwise, you can pass in a hex string.
+
+```svelte
+<script lang="ts">
+	import { hdrifyHex } from '@cattn/hdr';
+
+	let color = $state('#ff006f');
+</script>
+
+<h2 {@attach hdrifyHex(color)}>The color is in HDR!!</h2>
+```
+
+### `hdrifyBackgroundHex`
+
+If you'd like to dynamically change the background color, please pass it in with a `$state` rune. Otherwise, you can pass in a hex string.
+
+```svelte
+<script lang="ts">
+	import { hdrifyBackgroundHex } from '@cattn/hdr';
+
+	let color = $state('#ff006f');
+</script>
+
+<h2 {@attach hdrifyBackgroundHex(color)}>The background is in HDR!!</h2>
 ```
 
 ## Developing
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Once you've created a project and installed dependencies with `npm install`, start a development server:
 
 ```sh
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-Everything inside `src/lib` is part of your library, everything inside `src/routes` can be used as a showcase or preview app.
+Everything inside `src/lib` is the library code, everything in `src/routes` is for the demo/tests.
 
 ## Building
 
-To build your library:
-
-```sh
-npm pack
-```
-
-To create a production version of your showcase app:
+To build the library:
 
 ```sh
 npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
-
-## Publishing
-
-To publish your library to [npm](https://www.npmjs.com):
-
-```sh
-npm run build
-npm publish
 ```

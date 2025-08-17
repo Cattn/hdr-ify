@@ -110,3 +110,13 @@ function parseRgbLike(
 	const alpha = toAlpha(parts[3]);
 	return { red, green, blue, alpha };
 }
+
+export function rgb2hex(rgb: string) {
+	const match = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+	if (!match) return null;
+
+	function hex(x: string) {
+		return ('0' + parseInt(x).toString(16)).slice(-2);
+	}
+	return '#' + hex(match[1]) + hex(match[2]) + hex(match[3]);
+}
