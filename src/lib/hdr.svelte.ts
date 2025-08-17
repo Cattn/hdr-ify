@@ -14,7 +14,7 @@ export function hdrifyHex(hex: string): Attachment {
                 console.log(element);
                 const p3 = toP3(hex);
                 const el = element as HTMLElement;
-                el.style.setProperty('--hex', chosen);
+                el.style.setProperty('--hex', hex);
                 el.setAttribute('data-hdrifyhex', '');
                 if (p3) {
                     el.style.setProperty('--snow', p3.color);
@@ -70,7 +70,7 @@ export function hdrifyBackgroundHex(hex: string): Attachment {
                 console.log(element);
                 const p3 = toP3(hex);
                 const el = element as HTMLElement;
-                el.style.setProperty('--hex', chosen);
+                el.style.setProperty('--hex', hex);
                 el.setAttribute('data-hdrifybg', '');
                 if (p3) {
                     el.style.setProperty('--snow', p3.color);
