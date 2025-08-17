@@ -16,7 +16,7 @@ import { SomeComponent } from '@cattn/hdr';
 
 ```svelte
 <script>
-  import { SomeComponent } from '@cattn/hdr';
+	import { SomeComponent } from '@cattn/hdr';
 </script>
 
 <SomeComponent />

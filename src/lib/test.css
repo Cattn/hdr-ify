@@ -1,50 +1,95 @@
 /* color tech/test */
 
 @supports (color: color(display-p3 100% 100% 100%)) {
-    .colors { --red: color(display-p3 400% 0% 0%); --yellow: color(display-p3 400% 400% 0%); --green: color(display-p3 0% 400% 0%); --cyan: color(display-p3 0% 400% 400%); --blue: color(display-p3 0% 0% 400%); --pink: color(display-p3 400% 0% 400%) }
+	.colors {
+		--red: color(display-p3 400% 0% 0%);
+		--yellow: color(display-p3 400% 400% 0%);
+		--green: color(display-p3 0% 400% 0%);
+		--cyan: color(display-p3 0% 400% 400%);
+		--blue: color(display-p3 0% 0% 400%);
+		--pink: color(display-p3 400% 0% 400%);
+	}
 }
 
-.colors * + * { margin-left: -12px }
-.color { width: 56px; height: 56px; background: var(--snow); border-radius: 50%; }
-.red { background-color: var(--red) }
-.yellow { background-color: var(--yellow) }
-.green { background-color: var(--green) }
-.cyan { background-color: var(--cyan) }
-.blue { background-color: var(--blue) }
-.pink { background-color: var(--pink) }
+.colors * + * {
+	margin-left: -12px;
+}
+.color {
+	width: 56px;
+	height: 56px;
+	background: var(--snow);
+	border-radius: 50%;
+}
+.red {
+	background-color: var(--red);
+}
+.yellow {
+	background-color: var(--yellow);
+}
+.green {
+	background-color: var(--green);
+}
+.cyan {
+	background-color: var(--cyan);
+}
+.blue {
+	background-color: var(--blue);
+}
+.pink {
+	background-color: var(--pink);
+}
 
 @media (dynamic-range: high) and (color-gamut: p3) {
-    .colors { --red: color(display-p3 220% 0% 0%); --yellow: color(display-p3 220% 220% 0%); --green: color(display-p3 0% 220% 0%); --cyan: color(display-p3 0% 220% 220%); --blue: color(display-p3 0% 0% 220%); --pink: color(display-p3 220% 0% 220%) }
+	.colors {
+		--red: color(display-p3 220% 0% 0%);
+		--yellow: color(display-p3 220% 220% 0%);
+		--green: color(display-p3 0% 220% 0%);
+		--cyan: color(display-p3 0% 220% 220%);
+		--blue: color(display-p3 0% 0% 220%);
+		--pink: color(display-p3 220% 0% 220%);
+	}
 }
 
 /* mac vers */
 
 @supports (background: -webkit-named-image(i)) {
-    @supports (color: color(display-p3 100% 100% 100%)) {
-        .color { 
-            filter: brightness(10);
-            backdrop-filter: brightness(10) opacity(0);
-            border: 0;
-         }
-    }
+	@supports (color: color(display-p3 100% 100% 100%)) {
+		.color {
+			filter: brightness(10);
+			backdrop-filter: brightness(10) opacity(0);
+			border: 0;
+		}
+	}
 }
 
 /* normal hdr stuff */
 
 @media (dynamic-range: high) and (color-gamut: p3) {
-    :global(body) { --snow: color(display-p3 0% 400% 0%) }
+	:global(body) {
+		--snow: color(display-p3 0% 400% 0%);
+	}
 }
 
-h1, p, a { background: var(--snow); -webkit-text-fill-color: transparent; -webkit-background-clip: text; background-clip: text; text-wrap: balance }
+h1,
+p,
+a {
+	background: var(--snow);
+	-webkit-text-fill-color: transparent;
+	-webkit-background-clip: text;
+	background-clip: text;
+	text-wrap: balance;
+}
 
 /* mac vers */
 
 @supports (background: -webkit-named-image(i)) {
-    @supports (color: color(display-p3 100% 100% 100%)) {
-        h1, p, a { 
-            filter: brightness(10);
-            backdrop-filter: brightness(0) opacity(0);
-            background-color: #0000ff;
-         }
-    }
+	@supports (color: color(display-p3 100% 100% 100%)) {
+		h1,
+		p,
+		a {
+			filter: brightness(10);
+			backdrop-filter: brightness(0) opacity(0);
+			background-color: #0000ff;
+		}
+	}
 }
