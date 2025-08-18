@@ -29,9 +29,10 @@ src/+layout.svelte
 
 ### Configuration
 
-``Amplification``
+`Amplification`
 
-Amplification is an optional prop you can pass in to increase or decrease the intensity in which HDR appears across various platforms. The default value is ``1.8``.
+Amplification is an optional prop you can pass in to increase or decrease the intensity in which HDR appears across various platforms. The default value is `1.8`.
+
 ```svelte
 <HDRRouter amplification={1.5} />
 ```

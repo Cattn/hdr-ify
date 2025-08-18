@@ -143,22 +143,22 @@ export function hex2rgb(hex: string): string | null {
 	return `rgb(${r}, ${g}, ${b})`;
 }
 
-export function convertColor(color: string): { color: string; r: string; g: string; b: string; a: string } | null | undefined {
+export function convertColor(
+	color: string
+): { color: string; r: string; g: string; b: string; a: string } | null | undefined {
 	if (!color) return null;
 
 	const trimmedColor = color.trim();
-	
+
 	if (trimmedColor.match(/^rgb\(/i)) {
 		const hexColor = rgb2hex(trimmedColor);
 		if (!hexColor) return null;
 		return toP3(hexColor);
 	}
-	
+
 	if (trimmedColor.match(/^#[0-9a-fA-F]{3,6}$/)) {
 		return toP3(trimmedColor);
 	}
-	
+
 	return null;
 }
-
-
