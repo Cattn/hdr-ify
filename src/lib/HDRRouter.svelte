@@ -49,114 +49,93 @@
 		border-radius: 12px;
 	}
 
-	:global([data-hdrifyhex]) {
 		@media all and (dynamic-range: high) and (color-gamut: p3) {
-			-webkit-text-fill-color: transparent;
-			-webkit-background-clip: text;
-			background-clip: text;
-			background-color: color(
-				display-p3 calc(var(--r) * 3) calc(var(--g) * 3) calc(var(--b) * 3) / var(--a)
-			);
+            :global([data-hdrify]) {
+                -webkit-text-fill-color: transparent;
+                -webkit-background-clip: text;
+                background-clip: text;
+                background-color: color(
+                    display-p3 calc(var(--r) * 3) calc(var(--g) * 3) calc(var(--b) * 3) / var(--a)
+                );
+            }
 		}
 
 		@media not all and (dynamic-range: high) and (color-gamut: p3) {
-			-webkit-text-fill-color: transparent;
-			-webkit-background-clip: text;
-			background-clip: text;
-			background-color: var(--hex);
+            :global([data-hdrify]) {
+                -webkit-text-fill-color: transparent;
+                -webkit-background-clip: text;
+                background-clip: text;
+                background-color: var(--hex);
+            }
 		}
 
 		/* Safari/WebKit specific HDR brightness boost (excludes Chromium) */
 		@supports (background: -webkit-named-image(i)) {
 			@supports (dynamic-range: high) {
-				filter: brightness(3);
-				backdrop-filter: brightness(0) opacity(0);
-				color: var(--snow);
+                :global([data-hdrify]) {
+                    filter: brightness(3);
+                    backdrop-filter: brightness(0) opacity(0);
+                    background-color: var(--snow);
+                }
 			}
 
 			@media all and (dynamic-range: high) and (color-gamut: p3) {
-				filter: brightness(3);
-				backdrop-filter: brightness(0) opacity(0);
-				color: var(--snow);
+                :global([data-hdrify]) {
+                    filter: brightness(3);
+                    backdrop-filter: brightness(0) opacity(0);
+                    background-color: var(--snow);
+                }
 			}
 
 			@supports not (color: color(display-p3 100% 100% 100%)) {
-				filter: brightness(10);
-				backdrop-filter: brightness(10) opacity(0);
-				color: var(--hex);
+                :global([data-hdrify]) {
+                    filter: brightness(10);
+                    backdrop-filter: brightness(10) opacity(0);
+                    background-color: var(--hex);
+                }
 			}
 		}
-	}
 
-	:global([data-hdrify]) {
+	
 		@media all and (dynamic-range: high) and (color-gamut: p3) {
-			-webkit-text-fill-color: transparent;
-			-webkit-background-clip: text;
-			background-clip: text;
-			background-color: color(
-				display-p3 calc(var(--r) * 3) calc(var(--g) * 3) calc(var(--b) * 3) / var(--a)
-			);
+            :global([data-hdrifybg]) {
+                background-color: color(
+                    display-p3 calc(var(--r) * 3) calc(var(--g) * 3) calc(var(--b) * 3) / var(--a)
+                );
+            }
 		}
 
 		@media not all and (dynamic-range: high) and (color-gamut: p3) {
-			-webkit-text-fill-color: transparent;
-			-webkit-background-clip: text;
-			background-clip: text;
-			background-color: var(--hex);
+            :global([data-hdrifybg]) {
+                background-color: var(--hex);
+            }
 		}
 
 		/* Safari/WebKit specific HDR brightness boost (excludes Chromium) */
 		@supports (background: -webkit-named-image(i)) {
 			@supports (dynamic-range: high) {
-				filter: brightness(3);
-				backdrop-filter: brightness(0) opacity(0);
-				background-color: var(--snow);
+                :global([data-hdrifybg]) {
+                    filter: brightness(3);
+                    backdrop-filter: brightness(0) opacity(0);
+                    background-color: var(--snow);
+                }
 			}
 
 			@media all and (dynamic-range: high) and (color-gamut: p3) {
-				filter: brightness(3);
-				backdrop-filter: brightness(0) opacity(0);
-				background-color: var(--snow);
+                :global([data-hdrifybg]) {
+                    filter: brightness(3);
+                    backdrop-filter: brightness(0) opacity(0);
+                    background-color: var(--snow);
+                }
 			}
 
 			@supports not (color: color(display-p3 100% 100% 100%)) {
-				filter: brightness(10);
-				backdrop-filter: brightness(10) opacity(0);
-				background-color: var(--hex);
+                :global([data-hdrifybg]) {
+                    filter: brightness(10);
+                    backdrop-filter: brightness(10) opacity(0);
+                    background-color: var(--hex);
+                }
 			}
 		}
-	}
 
-	:global([data-hdrifybg]) {
-		@media all and (dynamic-range: high) and (color-gamut: p3) {
-			background-color: color(
-				display-p3 calc(var(--r) * 3) calc(var(--g) * 3) calc(var(--b) * 3) / var(--a)
-			);
-		}
-
-		@media not all and (dynamic-range: high) and (color-gamut: p3) {
-			background-color: var(--hex);
-		}
-
-		/* Safari/WebKit specific HDR brightness boost (excludes Chromium) */
-		@supports (background: -webkit-named-image(i)) {
-			@supports (dynamic-range: high) {
-				filter: brightness(3);
-				backdrop-filter: brightness(0) opacity(0);
-				background-color: var(--snow);
-			}
-
-			@media all and (dynamic-range: high) and (color-gamut: p3) {
-				filter: brightness(3);
-				backdrop-filter: brightness(0) opacity(0);
-				background-color: var(--snow);
-			}
-
-			@supports not (color: color(display-p3 100% 100% 100%)) {
-				filter: brightness(10);
-				backdrop-filter: brightness(10) opacity(0);
-				background-color: var(--hex);
-			}
-		}
-	}
 </style>

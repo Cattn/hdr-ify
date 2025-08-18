@@ -58,7 +58,7 @@
 	h1, p, a { -webkit-text-fill-color: transparent; -webkit-background-clip: text; background-clip: text; text-wrap: balance }
 	h1 { font-size: 112px; font-weight: 700 }
 	p, a { font-size: 40px; line-height: 140% }
-
+ 
 	a { display: block; text-decoration: none; border: 4px solid color(display-p3 0% 300% 0%); border-radius: 16px; padding: 4px 16px }
 
     @media all and (dynamic-range: high) and (color-gamut: p3) {
