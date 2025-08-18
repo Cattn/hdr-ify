@@ -8,9 +8,9 @@ A Svelte library for rendering element colors in HDR!
 npm i @cattn/hdr
 ```
 
-## Usage
+# Usage
 
-### Router
+## Router
 
 ```typescript
 import { HDRRouter } from '@cattn/hdr';
@@ -27,7 +27,16 @@ src/+layout.svelte
 <HDRRouter />
 ```
 
-### `hdrify`
+### Configuration
+
+``Amplification``
+
+Amplification is an optional prop you can pass in to increase or decrease the intensity in which HDR appears across various platforms. The default value is ``1.8``.
+```svelte
+<HDRRouter amplification={1.5} />
+```
+
+## `hdrify`
 
 Whatever `color:` is on the element will automatically be converted to HDR. It's added here via `style=` as an example.
 
@@ -39,7 +48,7 @@ Whatever `color:` is on the element will automatically be converted to HDR. It's
 <h2 style="color: #00ff00" {@attach hdrify()}>The color is in HDR!!</h2>
 ```
 
-### `hdrifyBackground`
+## `hdrifyBackground`
 
 Whatever `background-color:` is on the element will automatically be converted to HDR. It's added here via `style=` as an example.
 
@@ -51,7 +60,7 @@ Whatever `background-color:` is on the element will automatically be converted t
 <h2 style="background-color: #00ff00" {@attach hdrifyBackground()}>The background is in HDR!!</h2>
 ```
 
-### `hdrifyHex`
+## `hdrifyHex`
 
 If you'd like to dynamically change the color, please pass it in with a `$state` rune. Otherwise, you can pass in a hex string.
 
@@ -65,7 +74,7 @@ If you'd like to dynamically change the color, please pass it in with a `$state`
 <h2 {@attach hdrifyHex(color)}>The color is in HDR!!</h2>
 ```
 
-### `hdrifyBackgroundHex`
+## `hdrifyBackgroundHex`
 
 If you'd like to dynamically change the background color, please pass it in with a `$state` rune. Otherwise, you can pass in a hex string.
 

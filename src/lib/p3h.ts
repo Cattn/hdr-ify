@@ -113,7 +113,7 @@ function parseRgbLike(
 	return { red, green, blue, alpha };
 }
 
-export function rgb2hex(rgb: string) {
+export function rgb2hex(rgb: string): string | null {
 	const match = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
 	if (!match) return null;
 
@@ -123,7 +123,7 @@ export function rgb2hex(rgb: string) {
 	return '#' + hex(match[1]) + hex(match[2]) + hex(match[3]);
 }
 
-export function hex2rgb(hex: string) {
+export function hex2rgb(hex: string): string | null {
 	const match = hex.match(/^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/);
 	if (!match) return null;
 
@@ -143,7 +143,7 @@ export function hex2rgb(hex: string) {
 	return `rgb(${r}, ${g}, ${b})`;
 }
 
-export function convertColor(color: string) {
+export function convertColor(color: string): { color: string; r: string; g: string; b: string; a: string } | null | undefined {
 	if (!color) return null;
 
 	const trimmedColor = color.trim();

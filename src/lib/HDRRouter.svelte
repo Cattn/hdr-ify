@@ -4,6 +4,13 @@
 	import whiteWebm from './assets/white1.webm';
 	import whiteMp4 from './assets/white1.mp4';
 	import whiteMp42 from './assets/white2.mp4';
+	import { BROWSER } from 'esm-env'
+
+	let { amplification = 1.8 }: { amplification: number } = $props();
+
+	if (BROWSER) {
+		document.documentElement.style.setProperty('--amplification', amplification.toString());
+	}
 </script>
 
 <video
@@ -49,13 +56,17 @@
 		border-radius: 12px;
 	}
 
+	:global(:root) {
+		--amplification: 1.8;
+	}
+
 	@media all and (dynamic-range: high) and (color-gamut: p3) {
         :global([data-hdrify]) {
             -webkit-text-fill-color: transparent;
             -webkit-background-clip: text;
             background-clip: text;
             background-color: color(
-                display-p3 calc(var(--r) * 3) calc(var(--g) * 3) calc(var(--b) * 3) / var(--a)
+                display-p3 calc(var(--r) * var(--amplification)) calc(var(--g) * var(--amplification)) calc(var(--b) * var(--amplification)) / var(--a)
             );
         }
 	}
@@ -73,7 +84,7 @@
 	@supports (background: -webkit-named-image(i)) {
 		@supports (dynamic-range: high) {
                 :global([data-hdrify]) {
-                    filter: brightness(3);
+                    filter: brightness(var(--amplification));
                     backdrop-filter: brightness(0) opacity(0);
                     background-color: var(--snow) !important;
                 }
@@ -81,7 +92,7 @@
 
 			@media all and (dynamic-range: high) and (color-gamut: p3) {
                 :global([data-hdrify]) {
-                    filter: brightness(3);
+                    filter: brightness(var(--amplification));
                     backdrop-filter: brightness(0) opacity(0);
                     background-color: var(--snow);
                 }
@@ -100,7 +111,7 @@
 		@media all and (dynamic-range: high) and (color-gamut: p3) {
             :global([data-hdrifybg]) {
                 background-color: color(
-                    display-p3 calc(var(--r) * 3) calc(var(--g) * 3) calc(var(--b) * 3) / var(--a)
+                    display-p3 calc(var(--r) * var(--amplification)) calc(var(--g) * var(--amplification)) calc(var(--b) * var(--amplification)) / var(--a)
                 ) !important;
             }
 		}
@@ -115,7 +126,7 @@
 		@supports (background: -webkit-named-image(i)) {
 			@supports (dynamic-range: high) {
                 :global([data-hdrifybg]) {
-                    filter: brightness(3);
+                    filter: brightness(var(--amplification));
                     backdrop-filter: brightness(0) opacity(0);
                     background-color: var(--snow) !important;
                 }
@@ -123,7 +134,7 @@
 
 			@media all and (dynamic-range: high) and (color-gamut: p3) {
                 :global([data-hdrifybg]) {
-                    filter: brightness(3);
+                    filter: brightness(var(--amplification));
                     backdrop-filter: brightness(0) opacity(0);
                     background-color: var(--snow) !important;
                 }
