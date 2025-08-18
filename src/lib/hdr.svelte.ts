@@ -1,6 +1,6 @@
 import type { Attachment } from 'svelte/attachments';
 import { registerElement, unregisterElement } from './watchermodule.js';
-import { convertColor, rgb2hex } from './p3h.js';
+import { convertColor, rgb2hex, colorToHex } from './p3h.js';
 
 export function hdrifyHex(hex: string): Attachment {
 	return (element) => {
@@ -83,7 +83,7 @@ export function hdrifyBackground(): Attachment {
 				const chosen = inlineBg || getComputedStyle(element).backgroundColor;
 				console.log('Computed background-color:', chosen);
 				console.log(element);
-				const hex = rgb2hex(chosen) ?? '';
+				const hex = colorToHex(chosen) ?? '';
 				const p3 = convertColor(chosen);
 				el.style.setProperty('--hex', hex);
 				el.setAttribute('data-hdrifybg', '');

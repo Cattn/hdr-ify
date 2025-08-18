@@ -162,3 +162,60 @@ export function convertColor(
 
 	return null;
 }
+
+export function colorToHex(color: string): string | null {
+	if (!color) return null;
+	const s = color.trim();
+	const hexFull = /^#([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/;
+	const hexShort = /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{4})$/;
+	if (hexFull.test(s)) {
+		const h = s.slice(1);
+		if (h.length === 8) return `#${h.slice(0, 6)}`;
+		return `#${h}`;
+	}
+	if (hexShort.test(s)) {
+		const h = s.slice(1);
+		const r = h[0] + h[0];
+		const g = h[1] + h[1];
+		const b = h[2] + h[2];
+		return `#${r}${g}${b}`;
+	}
+	if (/^rgba?\(/i.test(s)) {
+		const parsed = parseRgbLike(s);
+		if (!parsed) return null;
+		const toHex = (n: number) => ('0' + Math.max(0, Math.min(255, Math.round(n))).toString(16)).slice(-2);
+		return `#${toHex(parsed.red)}${toHex(parsed.green)}${toHex(parsed.blue)}`;
+	}
+	if (/^color\(display-p3\s+/i.test(s)) {
+		const m = s.match(/color\(display-p3\s+([0-9.]+)\s+([0-9.]+)\s+([0-9.]+)\)/i);
+		if (m) {
+			const toHex = (v: number) => ('0' + Math.max(0, Math.min(255, Math.round(v * 255))).toString(16)).slice(-2);
+			const r = toHex(parseFloat(m[1]));
+			const g = toHex(parseFloat(m[2]));
+			const b = toHex(parseFloat(m[3]));
+			return `#${r}${g}${b}`;
+		}
+	}
+	try {
+		if (typeof document !== 'undefined') {
+			const el = document.createElement('span');
+			el.style.position = 'absolute';
+			el.style.opacity = '0';
+			el.style.pointerEvents = 'none';
+			el.style.backgroundColor = s;
+			document.body.appendChild(el);
+			const resolved = getComputedStyle(el).backgroundColor;
+			document.body.removeChild(el);
+			if (resolved) {
+				const parsed = parseRgbLike(resolved);
+				if (parsed) {
+					const toHex = (n: number) => ('0' + Math.max(0, Math.min(255, Math.round(n))).toString(16)).slice(-2);
+					return `#${toHex(parsed.red)}${toHex(parsed.green)}${toHex(parsed.blue)}`;
+				}
+			}
+		}
+	} catch {
+		return null;
+	}
+	return null;
+}
