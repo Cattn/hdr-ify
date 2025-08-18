@@ -135,17 +135,37 @@
 	@supports (background: -webkit-named-image(i)) {
 		@supports (dynamic-range: high) {
 			:global([data-hdrifybg]) {
+				position: relative;
+				isolation: isolate;
+				background-color: transparent !important;
+			}
+			:global([data-hdrifybg]::before) {
+				content: "";
+				position: absolute;
+				inset: 0;
+				background-color: var(--snow);
 				filter: brightness(var(--amplification));
-				backdrop-filter: brightness(0) opacity(0);
-				background-color: var(--snow) !important;
+				pointer-events: none;
+				z-index: -1;
+				border-radius: inherit;
 			}
 		}
 
 		@media all and (dynamic-range: high) and (color-gamut: p3) {
 			:global([data-hdrifybg]) {
+				position: relative;
+				isolation: isolate;
+				background-color: transparent !important;
+			}
+			:global([data-hdrifybg]::before) {
+				content: "";
+				position: absolute;
+				inset: 0;
+				background-color: var(--snow);
 				filter: brightness(var(--amplification));
-				backdrop-filter: brightness(0) opacity(0);
-				background-color: var(--snow) !important;
+				pointer-events: none;
+				z-index: -1;
+				border-radius: inherit;
 			}
 		}
 
