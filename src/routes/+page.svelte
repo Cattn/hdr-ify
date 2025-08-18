@@ -48,6 +48,25 @@
             }, 0);
         }
     });
+
+	function triggerArtificialScroll() {
+		if (!browser) return;
+		const originalX = window.scrollX;
+		const originalY = window.scrollY;
+		const root = document.documentElement;
+		const previousBehavior = root.style.scrollBehavior;
+		root.style.scrollBehavior = 'smooth';
+		const maxY = Math.max(0, root.scrollHeight - window.innerHeight);
+		requestAnimationFrame(() => {
+			window.scrollTo({ left: originalX, top: maxY, behavior: 'smooth' });
+			setTimeout(() => {
+				requestAnimationFrame(() => {
+					window.scrollTo({ left: originalX, top: originalY, behavior: 'smooth' });
+					root.style.scrollBehavior = previousBehavior;
+				});
+			}, 600);
+		});
+	}
 </script>
 
 <h1 id="hdrify-hex" {@attach hdrifyHex(color)}>Hdrify Hex: {color} & Snow: {snow1}</h1>
@@ -68,3 +87,59 @@
         color2 = '#00ff6f';
     }
 }}>{toggled ? 'Reset colors' : 'Change colors'}</button>
+
+<button onclick={triggerArtificialScroll}>Artificial scroll</button>
+
+
+<h1>hdr-ify</h1>
+	<p>Render interface colors in HDR on capable displays</p>
+
+	<a href="https://github.com/cattn/hdr-ify" rel="noreferrer" target="_blank">Source</a>
+    <h1>hdr-ify</h1>
+	<p>Render interface colors in HDR on capable displays</p>
+
+	<a href="https://github.com/cattn/hdr-ify" rel="noreferrer" target="_blank">Source</a>
+    <h1>hdr-ify</h1>
+	<p>Render interface colors in HDR on capable displays</p>
+
+	<a href="https://github.com/cattn/hdr-ify" rel="noreferrer" target="_blank">Source</a>
+    <h1>hdr-ify</h1>
+	<p>Render interface colors in HDR on capable displays</p>
+
+	<a href="https://github.com/cattn/hdr-ify" rel="noreferrer" target="_blank">Source</a>
+    <h1>hdr-ify</h1>
+	<p>Render interface colors in HDR on capable displays</p>
+
+	<a href="https://github.com/cattn/hdr-ify" rel="noreferrer" target="_blank">Source</a>
+    <h1>hdr-ify</h1>
+	<p>Render interface colors in HDR on capable displays</p>
+
+	<a href="https://github.com/cattn/hdr-ify" rel="noreferrer" target="_blank">Source</a>
+    <h1>hdr-ify</h1>
+	<p>Render interface colors in HDR on capable displays</p>
+
+	<a href="https://github.com/cattn/hdr-ify" rel="noreferrer" target="_blank">Source</a>
+    <h1>hdr-ify</h1>
+	<p>Render interface colors in HDR on capable displays</p>
+
+	<a href="https://github.com/cattn/hdr-ify" rel="noreferrer" target="_blank">Source</a>
+    <h1>hdr-ify</h1>
+	<p>Render interface colors in HDR on capable displays</p>
+
+	<a href="https://github.com/cattn/hdr-ify" rel="noreferrer" target="_blank">Source</a>
+    <h1>hdr-ify</h1>
+	<p>Render interface colors in HDR on capable displays</p>
+
+	<a href="https://github.com/cattn/hdr-ify" rel="noreferrer" target="_blank">Source</a>
+    <h1>hdr-ify</h1>
+	<p>Render interface colors in HDR on capable displays</p>
+
+	<a href="https://github.com/cattn/hdr-ify" rel="noreferrer" target="_blank">Source</a>
+    <h1>hdr-ify</h1>
+	<p>Render interface colors in HDR on capable displays</p>
+
+	<a href="https://github.com/cattn/hdr-ify" rel="noreferrer" target="_blank">Source</a>
+    <h1>hdr-ify</h1>
+	<p>Render interface colors in HDR on capable displays</p>
+
+	<a href="https://github.com/cattn/hdr-ify" rel="noreferrer" target="_blank">Source</a>

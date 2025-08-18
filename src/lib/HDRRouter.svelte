@@ -49,33 +49,33 @@
 		border-radius: 12px;
 	}
 
-		@media all and (dynamic-range: high) and (color-gamut: p3) {
-            :global([data-hdrify]) {
-                -webkit-text-fill-color: transparent;
-                -webkit-background-clip: text;
-                background-clip: text;
-                background-color: color(
-                    display-p3 calc(var(--r) * 3) calc(var(--g) * 3) calc(var(--b) * 3) / var(--a)
-                );
-            }
-		}
+	@media all and (dynamic-range: high) and (color-gamut: p3) {
+        :global([data-hdrify]) {
+            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            background-color: color(
+                display-p3 calc(var(--r) * 3) calc(var(--g) * 3) calc(var(--b) * 3) / var(--a)
+            );
+        }
+	}
 
-		@media not all and (dynamic-range: high) and (color-gamut: p3) {
-            :global([data-hdrify]) {
+	@media not all and (dynamic-range: high) and (color-gamut: p3) {
+        :global([data-hdrify]) {
                 -webkit-text-fill-color: transparent;
                 -webkit-background-clip: text;
                 background-clip: text;
                 background-color: var(--hex);
-            }
-		}
+        }
+	}
 
-		/* Safari/WebKit specific HDR brightness boost (excludes Chromium) */
-		@supports (background: -webkit-named-image(i)) {
-			@supports (dynamic-range: high) {
+	/* Safari/WebKit specific HDR brightness boost (excludes Chromium) */
+	@supports (background: -webkit-named-image(i)) {
+		@supports (dynamic-range: high) {
                 :global([data-hdrify]) {
                     filter: brightness(3);
                     backdrop-filter: brightness(0) opacity(0);
-                    background-color: var(--snow);
+                    background-color: var(--snow) !important;
                 }
 			}
 
@@ -101,7 +101,7 @@
             :global([data-hdrifybg]) {
                 background-color: color(
                     display-p3 calc(var(--r) * 3) calc(var(--g) * 3) calc(var(--b) * 3) / var(--a)
-                );
+                ) !important;
             }
 		}
 
@@ -117,7 +117,7 @@
                 :global([data-hdrifybg]) {
                     filter: brightness(3);
                     backdrop-filter: brightness(0) opacity(0);
-                    background-color: var(--snow);
+                    background-color: var(--snow) !important;
                 }
 			}
 
@@ -125,7 +125,7 @@
                 :global([data-hdrifybg]) {
                     filter: brightness(3);
                     backdrop-filter: brightness(0) opacity(0);
-                    background-color: var(--snow);
+                    background-color: var(--snow) !important;
                 }
 			}
 

@@ -122,3 +122,43 @@ export function rgb2hex(rgb: string) {
 	}
 	return '#' + hex(match[1]) + hex(match[2]) + hex(match[3]);
 }
+
+export function hex2rgb(hex: string) {
+	const match = hex.match(/^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/);
+	if (!match) return null;
+
+	const hexValue = match[1];
+	let r, g, b;
+
+	if (hexValue.length === 3) {
+		r = parseInt(hexValue[0] + hexValue[0], 16);
+		g = parseInt(hexValue[1] + hexValue[1], 16);
+		b = parseInt(hexValue[2] + hexValue[2], 16);
+	} else {
+		r = parseInt(hexValue.slice(0, 2), 16);
+		g = parseInt(hexValue.slice(2, 4), 16);
+		b = parseInt(hexValue.slice(4, 6), 16);
+	}
+
+	return `rgb(${r}, ${g}, ${b})`;
+}
+
+export function convertColor(color: string) {
+	if (!color) return null;
+
+	const trimmedColor = color.trim();
+	
+	if (trimmedColor.match(/^rgb\(/i)) {
+		const hexColor = rgb2hex(trimmedColor);
+		if (!hexColor) return null;
+		return toP3(hexColor);
+	}
+	
+	if (trimmedColor.match(/^#[0-9a-fA-F]{3,6}$/)) {
+		return toP3(trimmedColor);
+	}
+	
+	return null;
+}
+
+

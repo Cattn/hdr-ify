@@ -1,6 +1,6 @@
 import type { Attachment } from 'svelte/attachments';
 import { registerElement, unregisterElement } from './watchermodule.js';
-import { rgb2hex, toP3 } from './p3h.js';
+import { convertColor, rgb2hex } from './p3h.js';
 
 export function hdrifyHex(hex: string): Attachment {
 	return (element) => {
@@ -11,7 +11,7 @@ export function hdrifyHex(hex: string): Attachment {
 				console.log('Computed background-color:', chosen);
 				console.log(hex);
 				console.log(element);
-				const p3 = toP3(hex);
+				const p3 = convertColor(hex);
 				const el = element as HTMLElement;
 				el.style.setProperty('--hex', hex);
 				el.setAttribute('data-hdrify', '');
@@ -39,9 +39,10 @@ export function hdrify(): Attachment {
 				const chosen = computedStyle.color;
 				console.log('Computed background-color:', chosen);
 				console.log(element);
-				const p3 = toP3(chosen);
+				const hex = rgb2hex(chosen);
+				const p3 = convertColor(chosen);
 				const el = element as HTMLElement;
-				el.style.setProperty('--hex', chosen);
+				el.style.setProperty('--hex', hex);
 				el.setAttribute('data-hdrify', '');
 				if (p3) {
 					el.style.setProperty('--snow', p3.color);
@@ -63,16 +64,14 @@ export function hdrifyBackground(): Attachment {
 	return (element) => {
 		$effect(() => {
 			const update = () => {
-				const computedStyle = getComputedStyle(element);
-				const chosen = computedStyle.backgroundColor;
+				const el = element as HTMLElement;
+				const inlineBg = el.style.backgroundColor;
+				const chosen = inlineBg || getComputedStyle(element).backgroundColor;
 				console.log('Computed background-color:', chosen);
 				console.log(element);
-				const hex = rgb2hex(chosen);
-				const p3 = toP3(hex);
-				const el = element as HTMLElement;
-				if (hex) {
-					el.style.setProperty('--hex', hex);
-				}
+				const hex = rgb2hex(chosen) ?? '';
+				const p3 = convertColor(chosen);
+				el.style.setProperty('--hex', hex);
 				el.setAttribute('data-hdrifybg', '');
 				if (p3) {
 					el.style.setProperty('--snow', p3.color);
@@ -98,7 +97,7 @@ export function hdrifyBackgroundHex(hex: string): Attachment {
 				const chosen = computedStyle.backgroundColor;
 				console.log('Computed background-color:', chosen);
 				console.log(element);
-				const p3 = toP3(hex);
+				const p3 = convertColor(hex);
 				const el = element as HTMLElement;
 				el.style.setProperty('--hex', hex);
 				el.setAttribute('data-hdrifybg', '');
