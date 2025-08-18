@@ -6,10 +6,11 @@
 	import whiteMp42 from './assets/white2.mp4';
 	import { BROWSER } from 'esm-env';
 
-	let { amplification = 1.8 }: { amplification: number } = $props();
+	let { amplification = 1.8, delay = 0 }: { amplification: number; delay?: number } = $props();
 
 	if (BROWSER) {
 		document.documentElement.style.setProperty('--amplification', amplification.toString());
+		document.documentElement.style.setProperty('--hdrify-delay', (delay ?? 0).toString());
 	}
 </script>
 

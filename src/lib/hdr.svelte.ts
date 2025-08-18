@@ -24,8 +24,15 @@ export function hdrifyHex(hex: string): Attachment {
 				}
 			};
 
-			update();
-			registerElement(element, update);
+			const root = document.documentElement;
+			const delayVar = getComputedStyle(root).getPropertyValue('--hdrify-delay').trim();
+			const delayMs = Number(delayVar || 0);
+			const run = () => {
+				update();
+				registerElement(element, update);
+			};
+			if (delayMs > 0) setTimeout(run, delayMs);
+			else run();
 			return () => unregisterElement(element);
 		});
 	};
@@ -53,8 +60,15 @@ export function hdrify(): Attachment {
 				}
 			};
 
-			update();
-			registerElement(element, update);
+			const root = document.documentElement;
+			const delayVar = getComputedStyle(root).getPropertyValue('--hdrify-delay').trim();
+			const delayMs = Number(delayVar || 0);
+			const run = () => {
+				update();
+				registerElement(element, update);
+			};
+			if (delayMs > 0) setTimeout(run, delayMs);
+			else run();
 			return () => unregisterElement(element);
 		});
 	};
@@ -82,8 +96,15 @@ export function hdrifyBackground(): Attachment {
 				}
 			};
 
-			update();
-			registerElement(element, update);
+			const root = document.documentElement;
+			const delayVar = getComputedStyle(root).getPropertyValue('--hdrify-delay').trim();
+			const delayMs = Number(delayVar || 0);
+			const run = () => {
+				update();
+				registerElement(element, update);
+			};
+			if (delayMs > 0) setTimeout(run, delayMs);
+			else run();
 			return () => unregisterElement(element);
 		});
 	};
@@ -110,8 +131,15 @@ export function hdrifyBackgroundHex(hex: string): Attachment {
 				}
 			};
 
-			update();
-			registerElement(element, update);
+			const root = document.documentElement;
+			const delayVar = getComputedStyle(root).getPropertyValue('--hdrify-delay').trim();
+			const delayMs = Number(delayVar || 0);
+			const run = () => {
+				update();
+				registerElement(element, update);
+			};
+			if (delayMs > 0) setTimeout(run, delayMs);
+			else run();
 			return () => unregisterElement(element);
 		});
 	};
