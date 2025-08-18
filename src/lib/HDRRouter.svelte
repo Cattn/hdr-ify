@@ -143,7 +143,8 @@
 				content: "";
 				position: absolute;
 				inset: 0;
-				background-color: var(--snow);
+				background-color: var(--snow) !important;
+				backdrop-filter: brightness(0) opacity(0);
 				filter: brightness(var(--amplification));
 				pointer-events: none;
 				z-index: -1;
@@ -161,7 +162,8 @@
 				content: "";
 				position: absolute;
 				inset: 0;
-				background-color: var(--snow);
+				background-color: var(--snow) !important;
+				backdrop-filter: brightness(0) opacity(0);
 				filter: brightness(var(--amplification));
 				pointer-events: none;
 				z-index: -1;
