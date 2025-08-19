@@ -86,6 +86,8 @@ export function hdrifyBackground(): Attachment {
 				const hex = colorToHex(chosen) ?? '';
 				const p3 = convertColor(chosen);
 				el.style.setProperty('--hex', hex);
+				console.log('The converted hex is:', hex);
+				console.log('The converted p3 is:', p3);
 				el.setAttribute('data-hdrifybg', '');
 				if (p3) {
 					el.style.setProperty('--snow', p3.color);

@@ -163,6 +163,20 @@ export function convertColor(
 	return null;
 }
 
+function reverseToP3(p3r: number, p3g: number, p3b: number): string {
+	const toHex = (v: number) => {
+		let rgb = v * 255;
+		if (rgb > 0 && rgb < 1) rgb = 1;
+		const clamped = Math.max(0, Math.min(255, Math.round(rgb)));
+		return ('0' + clamped.toString(16)).slice(-2);
+	};
+	
+	const r = toHex(p3r);
+	const g = toHex(p3g);
+	const b = toHex(p3b);
+	return `#${r}${g}${b}`;
+}
+
 export function colorToHex(color: string): string | null {
 	if (!color) return null;
 	const s = color.trim();
@@ -189,11 +203,10 @@ export function colorToHex(color: string): string | null {
 	if (/^color\(display-p3\s+/i.test(s)) {
 		const m = s.match(/color\(display-p3\s+([0-9.]+)\s+([0-9.]+)\s+([0-9.]+)\)/i);
 		if (m) {
-			const toHex = (v: number) => ('0' + Math.max(0, Math.min(255, Math.round(v * 255))).toString(16)).slice(-2);
-			const r = toHex(parseFloat(m[1]));
-			const g = toHex(parseFloat(m[2]));
-			const b = toHex(parseFloat(m[3]));
-			return `#${r}${g}${b}`;
+			const r = parseFloat(m[1]);
+			const g = parseFloat(m[2]);
+			const b = parseFloat(m[3]);
+			return reverseToP3(r, g, b);
 		}
 	}
 	try {
@@ -214,7 +227,8 @@ export function colorToHex(color: string): string | null {
 				}
 			}
 		}
-	} catch {
+	} catch (e) {
+		console.error(e);
 		return null;
 	}
 	return null;
