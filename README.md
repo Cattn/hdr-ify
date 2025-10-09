@@ -39,7 +39,7 @@ Amplification is an optional prop you can pass in to increase or decrease the in
 
 `Delay`
 
-Delay is an optiona prop you can pass in to add an artifical delay before the application of HDR styles. This is useful if you have shifting content/themes on page load and want to prevent any issues. The default value is `0`. It's in `ms`
+Delay is an optional prop you can pass in to add an artifical delay before the application of HDR styles. This is useful if you have shifting content/themes on page load and want to prevent any issues. The default value is `0`. It's in `ms`
 
 ```svelte
 <HDRRouter delay={100} />
