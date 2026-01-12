@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { hdrifyHex, hdrifyBackground, hdrifyBackgroundHex, hdrify } from '$lib/hdr.svelte.js';
-	import { hdrEnabled, enableHDR, disableHDR } from '$lib';
+	import { hdrEnabled, enableHDR, disableHDR } from '$lib/config.js';
 	import { browser } from '$app/environment';
 
 	let color = $state('#ff006f');
@@ -85,31 +85,144 @@
 	}
 </script>
 
-<h1 id="hdrify-hex" {@attach hdrifyHex(color)}>Hdrify Hex: {color} & Snow: {snow1}</h1>
+<div class="min-h-screen bg-gray-50 p-4 sm:p-8">
+	<div class="max-w-4xl mx-auto space-y-8">
+		<div class="bg-white rounded-lg shadow-sm p-6">
+			<h1 class="text-2xl sm:text-3xl font-bold mb-6 text-gray-800">HDR Color Test</h1>
 
-<h1 id="hdrify-background" style="background-color: {color2}" {@attach hdrifyBackground()}>
-	Hdrify Background: {color3} & Snow: {snow2}
-</h1>
+			<div class="space-y-6">
+				<div class="bg-gray-50 rounded-lg p-4 sm:p-6">
+					<h2 class="text-lg font-semibold mb-3 text-gray-700">Color Controls</h2>
+					<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+						<div>
+							<label for="color-picker" class="block text-sm font-medium text-gray-600 mb-2"
+								>Hdrify Color</label
+							>
+							<input
+								id="color-picker"
+								type="color"
+								bind:value={color}
+								class="w-full h-10 rounded border border-gray-300 cursor-pointer"
+							/>
+							<input
+								type="text"
+								bind:value={color}
+								class="mt-2 w-full px-3 py-2 border border-gray-300 rounded text-sm font-mono"
+								placeholder="#ff006f"
+							/>
+						</div>
+						<div>
+							<label for="color2-picker" class="block text-sm font-medium text-gray-600 mb-2"
+								>Hdrify Background Color</label
+							>
+							<input
+								id="color2-picker"
+								type="color"
+								bind:value={color2}
+								class="w-full h-10 rounded border border-gray-300 cursor-pointer"
+							/>
+							<input
+								type="text"
+								bind:value={color2}
+								class="mt-2 w-full px-3 py-2 border border-gray-300 rounded text-sm font-mono"
+								placeholder="#00ff6f"
+							/>
+						</div>
+					</div>
+				</div>
 
-<h2 id="hdrify" style="color: {color2}" {@attach hdrify()}>Hdrify: {color3} & Snow: {snow3}</h2>
+				<div class="space-y-4">
+					<div class="border border-gray-200 rounded-lg p-4">
+						<h1 id="hdrify-hex" class="text-xl font-bold mb-2" {@attach hdrifyHex(color)}>
+							Hdrify Hex
+						</h1>
+						<p class="text-sm text-gray-600 font-mono break-all">
+							Color: {color} | Snow: {snow1}
+						</p>
+					</div>
 
-<h3 id="hdrify-background-hex" {@attach hdrifyBackgroundHex(color)}>
-	Hdrify Background Hex: {color} & Snow: {snow4}
-</h3>
+					<div class="border border-gray-200 rounded-lg p-4">
+						<h1
+							id="hdrify-background"
+							class="text-xl font-bold mb-2 p-3 rounded"
+							style="background-color: {color2}"
+							{@attach hdrifyBackground()}
+						>
+							Hdrify Background
+						</h1>
+						<p class="text-sm text-gray-600 font-mono break-all">
+							Color: {color3} | Snow: {snow2}
+						</p>
+					</div>
 
-<p>HDR enabled: {hdrOn ? 'on' : 'off'}</p>
-<button onclick={() => enableHDR()}>Enable HDR</button>
-<button onclick={() => disableHDR()}>Disable HDR</button>
+					<div class="border border-gray-200 rounded-lg p-4">
+						<h2
+							id="hdrify"
+							class="text-xl font-bold mb-2"
+							style="color: {color2}"
+							{@attach hdrify()}
+						>
+							Hdrify
+						</h2>
+						<p class="text-sm text-gray-600 font-mono break-all">
+							Color: {color3} | Snow: {snow3}
+						</p>
+					</div>
 
-<button
-	onclick={() => {
-		toggled = !toggled;
-		if (toggled) {
-			color = '#ffff6f';
-			color2 = '#ff006f';
-		} else {
-			color = '#ff006f';
-			color2 = '#00ff6f';
-		}
-	}}>{toggled ? 'Reset colors' : 'Change colors'}</button
->
+					<div class="border border-gray-200 rounded-lg p-4">
+						<h3
+							id="hdrify-background-hex"
+							class="text-xl font-bold mb-2 p-3 rounded"
+							{@attach hdrifyBackgroundHex(color)}
+						>
+							Hdrify Background Hex
+						</h3>
+						<p class="text-sm text-gray-600 font-mono break-all">
+							Color: {color} | Snow: {snow4}
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="bg-white rounded-lg shadow-sm p-6">
+			<h2 class="text-lg font-semibold mb-4 text-gray-700">HDR Controls</h2>
+			<div class="flex flex-wrap gap-3">
+				<div
+					class="px-4 py-2 rounded-lg font-medium {hdrOn
+						? 'bg-green-100 text-green-800'
+						: 'bg-red-100 text-red-800'}"
+				>
+					HDR: {hdrOn ? 'On' : 'Off'}
+				</div>
+				<button
+					onclick={() => enableHDR()}
+					class="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium transition-colors"
+				>
+					Enable HDR
+				</button>
+				<button
+					onclick={() => disableHDR()}
+					class="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg font-medium transition-colors"
+				>
+					Disable HDR
+				</button>
+				<button
+					onclick={() => {
+						toggled = !toggled;
+						if (toggled) {
+							color = '#ffff6f';
+							color2 = '#ff006f';
+						} else {
+							color = '#ff006f';
+							color2 = '#00ff6f';
+						}
+					}}
+					class="px-4 py-2 bg-purple-500 hover:bg-purple-600 text-white rounded-lg font-medium transition-colors"
+				>
+					{toggled ? 'Reset Colors' : 'Toggle Colors'}
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
