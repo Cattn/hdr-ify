@@ -1,6 +1,6 @@
 # @cattn/hdr
 
-A Svelte library for rendering element colors in HDR!
+A Svelte library for rendering element colors in HDR.
 
 ## Installation
 
@@ -16,7 +16,7 @@ npm i @cattn/hdr
 import { HDRRouter } from '@cattn/hdr';
 ```
 
-src/+layout.svelte
+Place in `src/+layout.svelte`:
 
 ```svelte
 <script lang="ts">
@@ -29,17 +29,15 @@ src/+layout.svelte
 
 ### Configuration
 
-`Amplification`
-
-Amplification is an optional prop you can pass in to increase or decrease the intensity in which HDR appears across various platforms. The default value is `1.8`.
+**Amplification**  
+Adjust HDR intensity across platforms (default `1.8`).
 
 ```svelte
 <HDRRouter amplification={1.5} />
 ```
 
-`Delay`
-
-Delay is an optional prop you can pass in to add an artifical delay before the application of HDR styles. This is useful if you have shifting content/themes on page load and want to prevent any issues. The default value is `0`. It's in `ms`
+**Delay**  
+Apply an artificial delay before HDR styles (default `0` ms).
 
 ```svelte
 <HDRRouter delay={100} />
@@ -47,7 +45,7 @@ Delay is an optional prop you can pass in to add an artifical delay before the a
 
 ## `hdrify`
 
-Whatever `color:` is on the element will automatically be converted to HDR. It's added here via `style=` as an example.
+Converts the element's `color` to HDR.
 
 ```svelte
 <script lang="ts">
@@ -59,7 +57,7 @@ Whatever `color:` is on the element will automatically be converted to HDR. It's
 
 ## `hdrifyBackground`
 
-Whatever `background-color:` is on the element will automatically be converted to HDR. It's added here via `style=` as an example.
+Converts the element's `background-color` to HDR.
 
 ```svelte
 <script lang="ts">
@@ -71,7 +69,7 @@ Whatever `background-color:` is on the element will automatically be converted t
 
 ## `hdrifyHex`
 
-If you'd like to dynamically change the color, please pass it in with a `$state` rune. Otherwise, you can pass in a hex string.
+Pass a `$state` rune or a hex string to set HDR color dynamically.
 
 ```svelte
 <script lang="ts">
@@ -85,7 +83,7 @@ If you'd like to dynamically change the color, please pass it in with a `$state`
 
 ## `hdrifyBackgroundHex`
 
-If you'd like to dynamically change the background color, please pass it in with a `$state` rune. Otherwise, you can pass in a hex string.
+Pass a `$state` rune or a hex string to set HDR background dynamically.
 
 ```svelte
 <script lang="ts">
@@ -97,15 +95,66 @@ If you'd like to dynamically change the background color, please pass it in with
 <h2 {@attach hdrifyBackgroundHex(color)}>The background is in HDR!!</h2>
 ```
 
+## `setHdrEnabled`
+
+Set HDR on or off globally.
+
+```svelte
+<script lang="ts">
+	import { setHdrEnabled } from '@cattn/hdr';
+</script>
+
+<button on:click={() => setHdrEnabled(false)}>Disable HDR</button>
+<button on:click={() => setHdrEnabled(true)}>Enable HDR</button>
+```
+
+## `enableHDR`
+
+Convenience helper to enable HDR globally.
+
+```svelte
+<script lang="ts">
+	import { enableHDR } from '@cattn/hdr';
+</script>
+
+<button on:click={enableHDR}>Enable HDR</button>
+```
+
+## `disableHDR`
+
+Convenience helper to disable HDR globally.
+
+```svelte
+<script lang="ts">
+	import { disableHDR } from '@cattn/hdr';
+</script>
+
+<button on:click={disableHDR}>Disable HDR</button>
+```
+
+## `isHdrEnabled`
+
+Read the current HDR state.
+
+```svelte
+<script lang="ts">
+	import { isHdrEnabled } from '@cattn/hdr';
+
+	const hdrOn = isHdrEnabled();
+</script>
+
+<p>HDR is {hdrOn ? 'enabled' : 'disabled'}.</p>
+```
+
 ## Developing
 
-Once you've created a project and installed dependencies with `npm install`, start a development server:
+After `npm install`, start a development server:
 
 ```sh
 npm run dev
 ```
 
-Everything inside `src/lib` is the library code, everything in `src/routes` is for the demo/tests.
+Library code lives in `src/lib`; demo/tests in `src/routes`.
 
 ## Building
 

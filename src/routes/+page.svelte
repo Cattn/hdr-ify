@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { hdrifyHex, hdrifyBackground, hdrifyBackgroundHex, hdrify } from '$lib/hdr.svelte.js';
+	import { hdrEnabled, enableHDR, disableHDR } from '$lib';
 	import { browser } from '$app/environment';
 
 	let color = $state('#ff006f');
@@ -12,6 +13,17 @@
 	let snow4 = $state('');
 
 	let toggled = $state(false);
+	let hdrOn = $state(true);
+
+	$effect(() => {
+		if (!browser) return;
+		const unsubscribe = hdrEnabled.subscribe((value) => {
+			hdrOn = value;
+		});
+		return () => {
+			unsubscribe();
+		};
+	});
 
 	$effect(() => {
 		if (browser) {
@@ -84,6 +96,10 @@
 <h3 id="hdrify-background-hex" {@attach hdrifyBackgroundHex(color)}>
 	Hdrify Background Hex: {color} & Snow: {snow4}
 </h3>
+
+<p>HDR enabled: {hdrOn ? 'on' : 'off'}</p>
+<button onclick={() => enableHDR()}>Enable HDR</button>
+<button onclick={() => disableHDR()}>Disable HDR</button>
 
 <button
 	onclick={() => {
