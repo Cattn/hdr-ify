@@ -1,6 +1,6 @@
 {
 	"name": "@cattn/hdr",
-	"version": "0.2.6",
+	"version": "0.3.0",
 	"description": "A Svelte library for rendering color in HDR",
 	"license": "MIT",
 	"author": "cattn",
