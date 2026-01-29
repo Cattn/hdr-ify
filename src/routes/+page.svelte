@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { hdrifyHex, hdrifyBackground, hdrifyBackgroundHex, hdrify } from '$lib/hdr.svelte.js';
-	import { hdrEnabled, enableHDR, disableHDR } from '$lib/config.js';
+	import { hdrEnabled, enableHDR, disableHDR, logEnabled, enableLog, disableLog } from '$lib/config.js';
 	import { browser } from '$app/environment';
 
 	let color = $state('#ff006f');
@@ -15,6 +15,8 @@
 	let toggled = $state(false);
 	let hdrOn = $state(true);
 
+	let logOn = $state(false);
+
 	$effect(() => {
 		if (!browser) return;
 		const unsubscribe = hdrEnabled.subscribe((value) => {
@@ -24,6 +26,16 @@
 			unsubscribe();
 		};
 	});
+
+	$effect(() => {
+	if (!browser) return;
+	const unsubscribe = logEnabled.subscribe((value) => {
+		logOn = value;
+	});
+	return () => {
+		unsubscribe();
+	};
+});
 
 	$effect(() => {
 		if (browser) {
@@ -221,6 +233,30 @@
 					class="px-4 py-2 bg-purple-500 hover:bg-purple-600 text-white rounded-lg font-medium transition-colors"
 				>
 					{toggled ? 'Reset Colors' : 'Toggle Colors'}
+				</button>
+			</div>
+		</div>
+		<div class="bg-white rounded-lg shadow-sm p-6">
+			<h2 class="text-lg font-semibold mb-4 text-gray-700">Logging Controls</h2>
+			<div class="flex flex-wrap gap-3">
+				<div
+					class="px-4 py-2 rounded-lg font-medium {logOn
+						? 'bg-green-100 text-green-800'
+						: 'bg-red-100 text-red-800'}"
+				>
+					Logging: {logOn ? 'On' : 'Off'}
+				</div>
+				<button
+					onclick={() => enableLog()}
+					class="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium transition-colors"
+				>
+					Enable Logging
+				</button>
+				<button
+					onclick={() => disableLog()}
+					class="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg font-medium transition-colors"
+				>
+					Disable Logging
 				</button>
 			</div>
 		</div>
