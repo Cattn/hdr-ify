@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store';
 
 const hdrEnabled = writable(true);
-const logEnabled = writable(true);
+const logEnabled = writable(false);
 
 let current = true;
 hdrEnabled.subscribe((value) => {
