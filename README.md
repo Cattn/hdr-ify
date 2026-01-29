@@ -146,6 +146,57 @@ Read the current HDR state.
 <p>HDR is {hdrOn ? 'enabled' : 'disabled'}.</p>
 ```
 
+## `setLogEnabled`
+
+Set logging on or off globally.
+
+```svelte
+<script lang="ts">
+	import { setLogEnabled } from '@cattn/hdr';
+</script>
+
+<button on:click={() => setLogEnabled(false)}>Disable Logging</button>
+<button on:click={() => setLogEnabled(true)}>Enable Logging</button>
+```
+
+## `enableLog`
+
+Convenience helper to enable logging globally.
+
+```svelte
+<script lang="ts">
+	import { enableLog } from '@cattn/hdr';
+</script>
+
+<button on:click={enableLog}>Enable Logging</button>
+```
+
+## `disableLog`
+
+Convenience helper to disable logging globally.
+
+```svelte
+<script lang="ts">
+	import { disableLog } from '@cattn/hdr';
+</script>
+
+<button on:click={disableLog}>Disable Logging</button>
+```
+
+## `isLogEnabled`
+
+Read the current logging state.
+
+```svelte
+<script lang="ts">
+	import { isLogEnabled } from '@cattn/hdr';
+
+	const logOn = isLogEnabled();
+</script>
+
+<p>Logging is {logOn ? 'enabled' : 'disabled'}.</p>
+```
+
 ## Developing
 
 After `npm install`, start a development server:
