@@ -137,6 +137,7 @@
 			:global([data-hdrifybg]) {
 				position: relative;
 				isolation: isolate;
+				z-index: 0;
 				background-color: transparent !important;
 			}
 			:global([data-hdrifybg]::before) {
@@ -156,6 +157,7 @@
 			:global([data-hdrifybg]) {
 				position: relative;
 				isolation: isolate;
+				z-index: 0;
 				background-color: transparent !important;
 			}
 			:global([data-hdrifybg]::before) {
