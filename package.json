@@ -1,6 +1,6 @@
 {
 	"name": "@cattn/hdr",
-	"version": "0.4.0",
+	"version": "0.5.0",
 	"description": "Render color in HDR — Svelte components/attachments and framework-agnostic web components",
 	"license": "MIT",
 	"author": "cattn",
