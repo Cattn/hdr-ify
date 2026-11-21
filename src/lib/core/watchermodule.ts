@@ -39,6 +39,9 @@ export function initGlobalWatcher() {
 			) {
 				const el = record.target as Element;
 				if (elementToUpdate.has(el)) scheduleElement(el);
+				for (const registered of elementToUpdate.keys()) {
+					if (registered !== el && el.contains(registered)) scheduleElement(registered);
+				}
 			}
 		}
 	});

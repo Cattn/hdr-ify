@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { toP3 } from '$lib/p3h.js';
+	import { toP3 } from '$lib/core/p3h.js';
 	import { browser } from '$app/environment';
 	import { onMount } from 'svelte';
 

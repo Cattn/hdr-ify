@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { hdrifyHex, hdrifyBackground, hdrifyBackgroundHex, hdrify } from '$lib/hdr.svelte.js';
-	import { hdrEnabled, enableHDR, disableHDR, logEnabled, enableLog, disableLog } from '$lib/config.js';
+	import { hdrEnabled, enableHDR, disableHDR, logEnabled, enableLog, disableLog } from '$lib/core/config.js';
 	import { browser } from '$app/environment';
 
 	let color = $state('#ff006f');
@@ -39,10 +39,8 @@
 
 	$effect(() => {
 		if (browser) {
-			const hex = document.getElementById('hdrify-hex');
 			const background = document.getElementById('hdrify-background');
 			const hdrify = document.getElementById('hdrify');
-			const backgroundHex = document.getElementById('hdrify-background-hex');
 
 			if (background) {
 				color3 = color;
@@ -76,25 +74,6 @@
 			}, 0);
 		}
 	});
-
-	function triggerArtificialScroll() {
-		if (!browser) return;
-		const originalX = window.scrollX;
-		const originalY = window.scrollY;
-		const root = document.documentElement;
-		const previousBehavior = root.style.scrollBehavior;
-		root.style.scrollBehavior = 'smooth';
-		const maxY = Math.max(0, root.scrollHeight - window.innerHeight);
-		requestAnimationFrame(() => {
-			window.scrollTo({ left: originalX, top: maxY, behavior: 'smooth' });
-			setTimeout(() => {
-				requestAnimationFrame(() => {
-					window.scrollTo({ left: originalX, top: originalY, behavior: 'smooth' });
-					root.style.scrollBehavior = previousBehavior;
-				});
-			}, 600);
-		});
-	}
 </script>
 
 <div class="min-h-screen bg-gray-50 p-4 sm:p-8">
