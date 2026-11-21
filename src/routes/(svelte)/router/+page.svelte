@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Router from '$lib/HDRRouter.svelte';
 	import { hdrifyHex, hdrifyBackgroundHex, hdrify } from '$lib/hdr.svelte.js';
 
 	let color = $state('#ff006f');

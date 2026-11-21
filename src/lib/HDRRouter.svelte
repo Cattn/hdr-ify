@@ -4,25 +4,24 @@
 	import whiteWebm from './assets/white1.webm';
 	import whiteMp4 from './assets/white1.mp4';
 	import whiteMp42 from './assets/white2.mp4';
-	import { BROWSER } from 'esm-env';
+	import { ensureStyles, setRouterVars } from './core/styles.js';
 
 	type Props = {
 		amplification?: number;
 		delay?: number;
-  	}
+	};
 
-	let props: Props = $props();
+	let { amplification = 1.8, delay = 0 }: Props = $props();
 
-	let { amplification = 1.8, delay = 0 } = props;
-
-	if (BROWSER) {
-		document.documentElement.style.setProperty('--amplification', amplification.toString());
-		document.documentElement.style.setProperty('--hdrify-delay', (delay ?? 0).toString());
-	}
+	$effect.pre(() => {
+		ensureStyles();
+		setRouterVars(amplification ?? 1.8, delay ?? 0);
+	});
 </script>
 
 <video
 	class="hdr-video"
+	style="position: fixed; right: 0; bottom: 0; width: 1px; height: 1px; opacity: 0.01; pointer-events: none; z-index: -1;"
 	autoplay
 	muted
 	loop
@@ -36,149 +35,14 @@
 	<source src={whiteMp42} type="video/mp4" />
 </video>
 
-<figure class="media">
-	<img src={magicJpg} alt="HDR sample" loading="lazy" />
+<figure
+	class="media"
+	style="display: grid; gap: 16px; align-items: center; justify-items: center; width: 100%;"
+>
+	<img
+		src={magicJpg}
+		alt="HDR sample"
+		loading="lazy"
+		style="max-width: 100%; height: auto; border-radius: 12px;"
+	/>
 </figure>
-
-<style>
-	.hdr-video {
-		position: fixed;
-		right: 0;
-		bottom: 0;
-		width: 1px;
-		height: 1px;
-		opacity: 0.01;
-		pointer-events: none;
-		z-index: -1;
-	}
-	.media {
-		display: grid;
-		gap: 16px;
-		align-items: center;
-		justify-items: center;
-		width: 100%;
-	}
-	.media img {
-		max-width: 100%;
-		height: auto;
-		border-radius: 12px;
-	}
-
-	:global(:root) {
-		--amplification: 1.8;
-	}
-
-	@media all and (dynamic-range: high) and (color-gamut: p3) {
-		:global([data-hdrify]) {
-			-webkit-text-fill-color: transparent;
-			-webkit-background-clip: text;
-			background-clip: text;
-			background-color: color(
-				display-p3 calc(var(--r) * var(--amplification)) calc(var(--g) * var(--amplification))
-					calc(var(--b) * var(--amplification)) / var(--a)
-			);
-		}
-	}
-
-	@media not all and (dynamic-range: high) and (color-gamut: p3) {
-		:global([data-hdrify]) {
-			-webkit-text-fill-color: transparent;
-			-webkit-background-clip: text;
-			background-clip: text;
-			background-color: var(--hex);
-		}
-	}
-
-	/* Safari/WebKit specific HDR brightness boost (excludes Chromium) */
-	@supports (background: -webkit-named-image(i)) {
-		@supports (dynamic-range: high) {
-			:global([data-hdrify]) {
-				filter: brightness(var(--amplification));
-				backdrop-filter: brightness(0) opacity(0);
-				background-color: var(--snow) !important;
-			}
-		}
-
-		@media all and (dynamic-range: high) and (color-gamut: p3) {
-			:global([data-hdrify]) {
-				filter: brightness(var(--amplification));
-				backdrop-filter: brightness(0) opacity(0);
-				background-color: var(--snow);
-			}
-		}
-
-		@supports not (color: color(display-p3 100% 100% 100%)) {
-			:global([data-hdrify]) {
-				filter: brightness(10);
-				backdrop-filter: brightness(10) opacity(0);
-				background-color: var(--hex);
-			}
-		}
-	}
-
-	@media all and (dynamic-range: high) and (color-gamut: p3) {
-		:global([data-hdrifybg]) {
-			background-color: color(
-				display-p3 calc(var(--r) * var(--amplification)) calc(var(--g) * var(--amplification))
-					calc(var(--b) * var(--amplification)) / var(--a)
-			) !important;
-		}
-	}
-
-	@media not all and (dynamic-range: high) and (color-gamut: p3) {
-		:global([data-hdrifybg]) {
-			background-color: var(--hex);
-		}
-	}
-
-	/* Safari/WebKit specific HDR brightness boost (excludes Chromium) */
-	@supports (background: -webkit-named-image(i)) {
-		@supports (dynamic-range: high) {
-			:global([data-hdrifybg]) {
-				position: relative;
-				isolation: isolate;
-				z-index: 0;
-				background-color: transparent !important;
-			}
-			:global([data-hdrifybg]::before) {
-				content: "";
-				position: absolute;
-				inset: 0;
-				background-color: var(--snow) !important;
-				backdrop-filter: brightness(0) opacity(0);
-				filter: brightness(var(--amplification));
-				pointer-events: none;
-				z-index: -1;
-				border-radius: inherit;
-			}
-		}
-
-		@media all and (dynamic-range: high) and (color-gamut: p3) {
-			:global([data-hdrifybg]) {
-				position: relative;
-				isolation: isolate;
-				z-index: 0;
-				background-color: transparent !important;
-			}
-			:global([data-hdrifybg]::before) {
-				content: "";
-				position: absolute;
-				inset: 0;
-				background-color: var(--snow) !important;
-				backdrop-filter: brightness(0) opacity(0);
-				filter: brightness(var(--amplification));
-				pointer-events: none;
-				z-index: -1;
-				border-radius: inherit;
-			}
-		}
-
-		@supports not (color: color(display-p3 100% 100% 100%)) {
-			:global([data-hdrifybg]) {
-				filter: brightness(10);
-				backdrop-filter: brightness(10) opacity(0);
-				background-color: var(--hex);
-			}
-		}
-	}
-</style>
