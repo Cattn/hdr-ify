@@ -2,11 +2,11 @@
 
 A library for rendering element colors in HDR, for Svelte, web components, or plain JS.
 
-| Import                | For                                               | Needs Svelte?        |
-| --------------------- | ------------------------------------------------- | -------------------- |
-| `@cattn/hdr`          | Svelte apps (`<HDRRouter>`, `{@attach hdrify()}`) | yes                  |
-| `@cattn/hdr/elements` | Any page/framework (`<hdr-router>`, `<hdr-ify>`)  | no (runtime bundled) |
-| `@cattn/hdr/core`     | Plain JS / other frameworks (`applyHdr(el)`)      | no                   |
+| Import                                   | For                                               | Needs Svelte?        |
+| ---------------------------------------- | ------------------------------------------------- | -------------------- |
+| [`@cattn/hdr`](#svelte)                  | Svelte apps (`<HDRRouter>`, `{@attach hdrify()}`) | yes                  |
+| [`@cattn/hdr/elements`](#web-components) | Any page/framework (`<hdr-router>`, `<hdr-ify>`)  | no (runtime bundled) |
+| [`@cattn/hdr/core`](#plain-js)           | Plain JS / other frameworks (`applyHdr(el)`)      | no                   |
 
 > Use one import per app
 
@@ -16,7 +16,9 @@ A library for rendering element colors in HDR, for Svelte, web components, or pl
 npm i @cattn/hdr
 ```
 
-# Usage
+# Svelte
+
+Import everything from `@cattn/hdr`.
 
 ## Router
 
@@ -205,17 +207,13 @@ Read the current logging state.
 <p>Logging is {logOn ? 'enabled' : 'disabled'}.</p>
 ```
 
-## Colors
-
-Any CSS color works: hex, `rgb()`, `hsl()`, `oklch()`, named colors, and more.
-
-Text colors update automatically, including `:hover` and inherited colors. Background colors from a class or stylesheet are only read once, so pass the color directly if it changes.
-
 # Web Components
+
+Import from `@cattn/hdr/elements`. No Svelte needed.
 
 ## Setup
 
-Import `@cattn/hdr/elements` once, then place `<hdr-router>` at the top of `<body>`.
+Import the package once, then place `<hdr-router>` at the top of `<body>`.
 
 ```html
 <script type="module">
@@ -258,7 +256,7 @@ Converts the background color to HDR. Displays as a block by default.
 
 ## HDR & Logging
 
-The same helpers (`setHdrEnabled`, `enableHDR`, `disableHDR`, `isHdrEnabled`, and the logging ones) are exported from `@cattn/hdr/elements`.
+The same [HDR and logging helpers](#sethdrenabled) as in Svelte are exported here too.
 
 ```html
 <script type="module">
@@ -270,6 +268,8 @@ The same helpers (`setHdrEnabled`, `enableHDR`, `disableHDR`, `isHdrEnabled`, an
 
 # Plain JS
 
+Import from `@cattn/hdr/core`. No Svelte needed.
+
 ## `applyHdr`
 
 Converts an element's color to HDR. Returns a function that removes it.
@@ -280,6 +280,24 @@ import { applyHdr } from '@cattn/hdr/core';
 const stop = applyHdr(element);
 const stopBg = applyHdr(element, { mode: 'background', color: '#ff006f' });
 ```
+
+## HDR & Logging
+
+The same [HDR and logging helpers](#sethdrenabled) as in Svelte are exported here too.
+
+```ts
+import { disableHDR } from '@cattn/hdr/core';
+
+disableHDR();
+```
+
+# Colors
+
+Any CSS color works: hex, `rgb()`, `hsl()`, `oklch()`, named colors, and more.
+
+Text colors update automatically, including `:hover` and inherited colors. Background colors from a class or stylesheet are only read once, so pass the color directly if it changes.
+
+# Development
 
 ## Developing
 
