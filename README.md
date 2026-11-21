@@ -8,7 +8,7 @@ A library for rendering element colors in HDR, for Svelte, web components, or pl
 | `@cattn/hdr/elements` | Any page/framework (`<hdr-router>`, `<hdr-ify>`)  | no (runtime bundled) |
 | `@cattn/hdr/core`     | Plain JS / other frameworks (`applyHdr(el)`)      | no                   |
 
-> Use one import per app. Each one has its own HDR on/off state.
+> Use one import per app
 
 ## Installation
 
